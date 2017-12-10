@@ -2,21 +2,29 @@
 
 CC = xelatex
 SAMPLES_DIR = samples
-RESUME_DIR = samples/resume
-CV_DIR = samples/cv
-RESUME_SRCS = $(shell find $(RESUME_DIR) -name '*.tex')
-CV_SRCS = $(shell find $(CV_DIR) -name '*.tex')
+SAMPLES_RESUME_SRCS = $(shell find $(SAMPLES_DIR)/resume -name '*.tex')
+SAMPLES_CV_SRCS = $(shell find $(SAMPLES_DIR)/cv -name '*.tex')
 
-samples: $(foreach x, coverletter cv resume, $x.pdf)
+SRCS_DIR = src
 
-resume.pdf: $(SAMPLES_DIR)/resume.tex $(RESUME_SRCS)
-	$(CC) -output-directory=$(SAMPLES_DIR) $<
+DIST_DIR = dist
 
-cv.pdf: $(SAMPLES_DIR)/cv.tex $(CV_SRCS)
-	$(CC) -output-directory=$(SAMPLES_DIR) $<
+cv: $(SRCS_DIR)/cv.tex
+	$(CC) -output-directory=$(DIST_DIR) $<
 
-coverletter.pdf: $(SAMPLES_DIR)/coverletter.tex
-	$(CC) -output-directory=$(SAMPLES_DIR) $<
+samples: $(foreach x, coverletter cv resume, samples_$x.pdf)
+
+samples_resume.pdf: $(SAMPLES_DIR)/resume.tex $(SAMPLES_RESUME_SRCS)
+	$(CC) -output-directory=$(DIST_DIR) $<
+
+samples_cv.pdf: $(SAMPLES_DIR)/cv.tex $(SAMPLES_CV_SRCS)
+	$(CC) -output-directory=$(DIST_DIR) $<
+
+samples_coverletter.pdf: $(SAMPLES_DIR)/coverletter.tex
+	$(CC) -output-directory=$(DIST_DIR) $<
 
 clean:
-	rm -rf $(SAMPLES_DIR)/*.pdf $(SAMPLES_DIR)/*.aux $(SAMPLES_DIR)/*.log $(SAMPLES_DIR)/*.out
+	rm -rf $(DIST_DIR)/*.pdf \
+		$(DIST_DIR)/*.aux \
+		$(DIST_DIR)/*.log \
+		$(DIST_DIR)/*.out
