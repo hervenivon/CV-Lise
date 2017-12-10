@@ -1,4 +1,4 @@
-.PHONY: samples
+.PHONY: samples all
 
 CC = xelatex
 SAMPLES_DIR = samples
