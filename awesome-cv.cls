@@ -653,7 +653,7 @@
 % Define an environment for cvsubitems(for cventry)
 \newenvironment{cvsubitems}{%
   \begin{justify}
-  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+  \begin{itemize}[leftmargin=2.5ex, nosep, noitemsep]
     \setlength{\parskip}{0pt}
     \renewcommand{\labelitemi}{\bullet}
 }{%
