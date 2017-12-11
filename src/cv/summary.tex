@@ -18,3 +18,76 @@ Master’s degree in Computer Science and Software Engineering, software design,
 Enjoys great restaurants and wine tasting with friends and his wife, doing or collecting pop art and everything that involves his young boy.
 
 \end{cvparagraph}
+
+%---------------------------------------------------------
+\begin{cventries}
+    {
+        % This section depends on chronology package
+        % Documentation is here: http://ctan.localhost.net.ar/macros/latex/contrib/chronology/chronology.pdf
+        %
+        % \decimaldate{day}{month}{year}
+
+        \vspace{0.1cm}
+
+        \definecolor{redbird}{HTML}{DA291C}
+        \definecolor{airware}{HTML}{343641}
+        \tikzset{>=|}
+
+        % Default chronoloygy tikzset settings
+        % \tikzset{%
+        %     ,chronevent/.style={fill=black,draw=none,opacity=0.5}
+        %     ,chronlabel/.style={opacity=1}
+        %     ,chrontickslabel/.style={chronlabel}
+        %     ,chroneventlabel/.style={chronlabel}
+        %     ,eventlabel/.style={chroneventlabel,anchor=south west,yshift=.2\unit,rotate=45}
+        %     ,flippedeventlabel/.style={chroneventlabel,anchor=north west,yshift=-.2\unit,rotate=-45}
+        %     }
+        %
+        % \tikzset{chronevent/.style={fill=black,draw=none,opacity=0.5,line width=0.1pt}}
+
+        % WORKING Chronology example:
+        %
+        % \begin{chronology}[3]{1984}{2018}{0.84\textwidth}
+        %   \event{1984}{\color{awesome}birth}
+        %   % \tikzset{chronevent/.style={fill=black,draw=none,opacity=0.5}}
+        %   % \tikzset{chronevent/.style={fill=testlightgray,draw=none,opacity=0.5}}
+        %   \tikzset{chronevent/.style={fill=awesome,draw=none,opacity=0.5}}
+        %   \event[1985]{1986}{two}
+        %   \tikzset{chronevent/.style={fill=black,draw=none,opacity=0.5}}
+        %   \event{\decimaldate{25}{12}{2001}}{three}
+        % \end{chronology}
+        \begin{chronology}[3]{\decimaldate{1}{7}{2006}}{\decimaldate{30}{6}{2018}}{0.92\textwidth}[1.1\textwidth]
+            %Milestones
+            \event{2007}{\descriptionstyle{Accenture Integration}}
+
+            \tikzset{chronevent/.style={fill=redbird,draw=none,opacity=0.5}}
+            \event{\decimaldate{1}{12}{2013}}{\descriptionstyle{Meet Redbird}}
+            \tikzset{chronevent/.style={fill=black,draw=none,opacity=0.5}}
+
+            \event{\decimaldate{1}{5}{2014}}{\descriptionstyle{1st place innovation contest}}
+            \event{\decimaldate{1}{12}{2014}}{\descriptionstyle{PoC for Drone processing @ scale}}
+            \event{\decimaldate{1}{5}{2015}}{\descriptionstyle{Innovation lead}}
+            \tikzset{chronevent/.style={fill=redbird,draw=none,opacity=0.7}}
+            \event{\decimaldate{1}{7}{2016}}{\descriptionstyle{1st Serverless microservice}}
+            \event{\decimaldate{1}{12}{2016}}{\descriptionstyle{1st Deep Learning Results}}
+            \event{\decimaldate{1}{9}{2017}}{\descriptionstyle{20+ serverless microservices}}
+            \event{\decimaldate{31}{12}{2017}}{\descriptionstyle{Deep Learning Leap forward}}
+            \tikzset{chronevent/.style={fill=black,draw=none,opacity=0.5}}
+
+            %Periods
+            %Set periods under the timeline
+            \tikzset{eventlabel/.style={chroneventlabel,anchor=south,yshift=-0.85\unit,rotate=0}}
+            %Set a light default for periods
+            \tikzset{chronevent/.style={fill=black,draw=none,opacity=0.2}}
+
+            \event[\decimaldate{3}{1}{2007}]{\decimaldate{31}{8}{2009}}{\descriptionstyle{Analyst}}
+            \event[\decimaldate{1}{9}{2009}]{\decimaldate{31}{8}{2012}}{\descriptionstyle{Consultant}}
+            \event[\decimaldate{31}{8}{2012}]{\decimaldate{8}{1}{2016}}{\descriptionstyle{Manager}}
+
+            \tikzset{chronevent/.style={fill=redbird,draw=none,opacity=0.2}}
+            \event[\decimaldate{16}{1}{2016}]{2018}{\descriptionstyle{Redbird{\enskip\cdotp\enskip}Airware}}
+            \tikzset{chronevent/.style={fill=black,draw=none,opacity=0.5}}
+        \end{chronology}
+        \vspace{0.8cm}
+    }
+\end{cventries}
