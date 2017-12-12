@@ -10,9 +10,12 @@ SRCS_CV_INCLUDES = $(shell find $(SRCS_DIR)/cv/* -name '*.tex')
 
 DIST_DIR = dist
 
-all: cv
+all: cv cv_extended
 
 cv: $(SRCS_DIR)/cv.tex $(SRCS_CV_INCLUDES)
+	$(CC) -output-directory=$(DIST_DIR) $<
+
+cv_extended: $(SRCS_DIR)/cv_extended.tex $(SRCS_CV_INCLUDES)
 	$(CC) -output-directory=$(DIST_DIR) $<
 
 samples: $(foreach x, coverletter cv resume, samples_$x.pdf)
