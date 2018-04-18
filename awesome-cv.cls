@@ -518,6 +518,11 @@
   \end{minipage}
 }
 
+% Source: https://github.com/liantze/AltaCV/blob/master/altacv.cls
+\newcommand{\cvtag}[1]{%
+  \tikz[baseline]\node[anchor=base,draw=awesome!15,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{#1};
+}
+
 % Define a footer for CV
 % Usage: \makecvfooter{<left>}{<center>}{<right>}
 \newcommand*{\makecvfooter}[3]{%
