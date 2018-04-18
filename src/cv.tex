@@ -18,15 +18,17 @@
 % CONFIGURATIONS
 %-------------------------------------------------------------------------------
 % A4 paper size by default, use 'letterpaper' for US letter
-\documentclass[10pt, a4paper]{awesome-cv}
+\documentclass[9pt, a4paper]{awesome-cv}
 
 % Additional package for timeline preview:
 % - http://ctan.localhost.net.ar/macros/latex/contrib/chronology/chronology.pdf
 % - https://tex.stackexchange.com/questions/385440/latex-chronology-change-end-of-timeline/385443
 \usepackage{chronology}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
 
 % Configure page margins with geometry
-\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+\geometry{left=1.45cm, top=.8cm, right=1.45cm, bottom=1.8cm, footskip=.5cm}
 
 % Specify the location of the included fonts
 \fontdir[fonts/]
@@ -74,11 +76,12 @@
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
 \input{src/cv/summary.tex}
-\input{src/cv/experience.tex}
 \input{src/cv/skills.tex}
-\input{src/cv/extracurricular.tex}
 \input{src/cv/education.tex}
-\input{src/cv/certifications.tex}
+\input{src/cv/work_life_balance.tex}
+\newpage
+\input{src/cv/experience.tex}
+\input{src/cv/extracurricular.tex}
 \input{src/cv/honors.tex}
 
 % Will remain unwritten for the moment:

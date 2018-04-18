@@ -1,0 +1,91 @@
+% Adapted from https://tex.stackexchange.com/questions/82727/create-a-ring-diagram-in-tex/82729#82729
+
+% The wheelchart macro
+\newcommand{\wheelchart}[3]{
+    \def\innerradius{#2}%
+    \def\outerradius{#1}%
+
+    % Calculate total
+    \pgfmathsetmacro{\totalnum}{0}
+    \foreach \value/\colour/\name in {#3} {
+        \pgfmathparse{\value+\totalnum}
+        \global\let\totalnum=\pgfmathresult
+    }
+
+    \begin{tikzpicture}
+
+      % Calculate the thickness and the middle line of the wheel
+      \pgfmathsetmacro{\wheelwidth}{\outerradius-\innerradius}
+      \pgfmathsetmacro{\midradius}{(\outerradius+\innerradius)/2}
+
+      % Rotate so we start from the top
+      \begin{scope}[rotate=90]
+
+      % Loop through each value set. \cumnum keeps track of where we are in the wheel
+      \pgfmathsetmacro{\cumnum}{0}
+      \foreach \value/\colour/\name in {#3} {
+            \pgfmathsetmacro{\newcumnum}{\cumnum + \value/\totalnum*360}
+
+            % Calculate the percent value
+            \pgfmathsetmacro{\percentage}{\value/\totalnum*100}
+            % Calculate the mid angle of the colour segments to place the labels
+            \pgfmathsetmacro{\midangle}{-(\cumnum+\newcumnum)/2}
+
+            % This is necessary for the labels to align nicely
+            \pgfmathparse{
+               (-\midangle<180?"west":"east")
+            } \edef\textanchor{\pgfmathresult}
+            \pgfmathsetmacro\labelshiftdir{1-2*(-\midangle>180)}
+
+            % Draw the color segments. Somehow, the \midrow units got lost, so we add 'pt' at the end. Not nice...
+            \fill[\colour] (-\cumnum:\outerradius) arc (-\cumnum:-(\newcumnum):\outerradius) --
+            (-\newcumnum:\innerradius) arc (-\newcumnum:-(\cumnum):\innerradius) -- cycle;
+
+            % Draw the data labels with percentages
+            % \draw  [*-,thin] node [append after command={(\midangle:\midradius pt) -- (\midangle:\outerradius + 1ex) -- (\tikzlastnode)}] at (\midangle:\outerradius + 1ex) [xshift=\labelshiftdir*0.5cm,inner sep=0pt, outer sep=0pt, ,anchor=\textanchor]{\name: \pgfmathprintnumber{\percentage}\%};
+            % Draw the data labels without percentages
+            \draw  [*-,thin] node [append after command={(\midangle:\midradius pt) -- (\midangle:\outerradius + 1ex) -- (\tikzlastnode)}] at (\midangle:\outerradius + 1ex) [xshift=\labelshiftdir*0.5cm,inner sep=0pt, outer sep=0pt, ,anchor=\textanchor]{\name};
+
+            % Set the old cumulated angle to the new value
+            \global\let\cumnum=\newcumnum
+        }
+
+      \end{scope}
+    \end{tikzpicture}
+}
+
+%-------------------------------------------------------------------------------
+%   SECTION TITLE
+%-------------------------------------------------------------------------------
+\cvsection{Work Life Balance}
+
+%-------------------------------------------------------------------------------
+%   CONTENT
+%-------------------------------------------------------------------------------
+\begin{cventries}
+
+% \wheelchart{1.5cm}{0.5cm}{%
+%   10/13em/accent!30/Sleeping \& dreaming about work,
+%   25/9em/accent!60/Public resolving issues with Yahoo!\ investors,
+%   5/12em/accent!10/New York \& San Francisco Ballet Jawbone board member,
+%   20/12em/accent!40/Spending time with family,
+%   5/8em/accent!20/Business development for Yahoo!\ after the Verizon acquisition,
+%   30/9em/accent/Showing Yahoo!\ employees that their work has meaning,
+%   5/8em/accent!20/Baking cupcakes
+% }
+
+\definecolor{redbird}{HTML}{DA291C}
+
+% Usage: \wheelchart{<value1>/<colour1>/<label1>, ...}
+\wheelchart{1.7cm}{1.1cm}{
+    15/redbird/\descriptionstyle{Sleeping \& Dreaming about work},
+    23/redbird!80/\descriptionstyle{Brainstorming with my team},
+    17/redbird!60/\descriptionstyle{Design and Architecture},
+    14/redbird!40/\descriptionstyle{Prototyping, development},
+    10/redbird!30/\descriptionstyle{News reading, Technology Watch},
+    15/redbird!20/\descriptionstyle{Spending time with family, playing Lego with my son},
+    5/redbird!10/\descriptionstyle{Cooking}
+}
+
+%---------------------------------------------------------
+\end{cventries}
