@@ -20,6 +20,8 @@ In this `pdf` you will find the folder where the binaries are installed. In my c
 
 Add the binary directory to your `PATH`: `$> export PATH="/usr/local/texlive/2017/bin/x86_64-darwin/:$PATH"`
 
+If you encounter the following error, please download the `.otf` and double click on it to install it. Install the FontAwesome font from the `fonts` folder.
+
 ## Credits
 
 - [LaTeX FontAwesome](https://github.com/plorcupine/latex-fontawesome) is a binding that allow use of [FontAwesome](http://fontawesome.io/) into your `TeX`documents.
