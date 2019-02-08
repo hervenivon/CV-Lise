@@ -36,6 +36,12 @@ Then at the root of this repository:
 $> docker run -v `pwd`:`pwd` -w `pwd` raabf/latex-versions:texlive2018 make cv
 ```
 
+## GitHub Actions
+
+This repository uses [GitHub Actions](https://help.github.com/articles/about-github-actions/) and leverage open source actions:
+- [aws cli](https://github.com/actions/aws/tree/master/cli) from [`actions`](https://github.com/actions), it helps uploading the artifact on S3
+- [upload-to-release](https://github.com/JasonEtco/upload-to-release) from [JasonEtco](https://github.com/JasonEtco) which enables storing the CV in the release
+
 ## Credits
 
 - [LaTeX FontAwesome](https://github.com/plorcupine/latex-fontawesome) is a binding that allow use of [FontAwesome](http://fontawesome.io/) into your `TeX`documents.
