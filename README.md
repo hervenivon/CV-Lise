@@ -55,7 +55,8 @@ This repository uses [GitHub Actions](https://help.github.com/articles/about-git
   - [latex-fontawesome](https://github.com/plorcupine/latex-fontawesome),
   - [Using font-awesome with xe-latex](https://coderwall.com/p/r67dyq/using-font-awesome-with-xe-latex),
 - [ ] Automatic pdf comparison ([here](https://github.com/vslavik/diff-pdf))
-- [ ] Continuous integration with circleci:
+- [ ] Add a Github actions filter to avoid onPush worklow when this is a release
+- [X] Continuous integration with circleci:
   - [Simple gist](https://gist.github.com/retrage/dc0980ec4c79b33cd522c4f4f4b82900)
   - [LaTeX with circleci](https://github.com/deeptrain/latex-circleci)
   - [Building PDF with LaTeX on circleci](https://discuss.circleci.com/t/latex-pdf-building/668/3)
