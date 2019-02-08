@@ -23,13 +23,13 @@ workflow "OnPush Workflow" {
 action "Store file" {
   uses = "actions/aws/cli@master"
   needs = ["LaTex build"]
-  args = "aws s3 cp dist/cv.pdf s3://github.com-hervenivon/CV/$GITHUB_REF/cv.pdf"
+  args = "s3 cp dist/cv.pdf s3://github.com-hervenivon/CV/$GITHUB_REF/cv.pdf"
   secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]
 }
 
 action "Send link" {
   uses = "actions/aws/cli@master"
   needs = ["Store file"]
-  args = "aws sns publish --message \"CV Published\" --phone-number $PHONE_NUMBER"
+  args = "sns publish --message \"CV Published\" --phone-number $PHONE_NUMBER"
   secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "PHONE_NUMBER"]
 }
