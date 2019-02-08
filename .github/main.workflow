@@ -8,7 +8,7 @@ action "LaTex build" {
   runs = "make all"
 }
 
-action "Upload CV to S3" {
+action "Upload CV to release" {
   uses = "JasonEtco/upload-to-release@master"
   needs = ["LaTex build"]
   args = "dist/cv.pdf"
