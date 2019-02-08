@@ -11,6 +11,6 @@ action "LaTex build" {
 action "Upload CV to release" {
   uses = "JasonEtco/upload-to-release@master"
   needs = ["LaTex build"]
-  args = "dist/cv.pdf"
+  args = "dist/cv.pdf application/pdf"
   secrets = ["GITHUB_TOKEN"]
 }
