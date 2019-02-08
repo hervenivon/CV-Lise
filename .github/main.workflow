@@ -3,6 +3,11 @@ workflow "OnRelease Workflow" {
   resolves = ["Send release link"]
 }
 
+workflow "OnPush Workflow" {
+  on = "push"
+  resolves = ["Send link"]
+}
+
 action "LaTex build" {
   uses = "docker://raabf/latex-versions:latest"
   runs = "make all"
@@ -15,9 +20,11 @@ action "Upload CV to release" {
   secrets = ["GITHUB_TOKEN"]
 }
 
-workflow "OnPush Workflow" {
-  on = "push"
-  resolves = ["Send link"]
+action "Store release file" {
+  uses = "actions/aws/cli@master"
+  needs = ["Upload CV to release"]
+  args = "s3 cp dist/cv.pdf s3://github.com-hervenivon/CV/$GITHUB_REF/cv.pdf --acl public-read"
+  secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]
 }
 
 action "Store file" {
@@ -27,23 +34,16 @@ action "Store file" {
   secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]
 }
 
-action "Send link" {
+action "Send release link" {
   uses = "actions/aws/cli@master"
-  needs = ["Store file"]
+  needs = ["Store release file"]
   args = "sns publish --message \"CV Published at https://s3.amazonaws.com/github.com-hervenivon/CV/$GITHUB_REF/cv.pdf\" --phone-number $PHONE_NUMBER"
   secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "PHONE_NUMBER"]
 }
 
-action "Store release file" {
+action "Send link" {
   uses = "actions/aws/cli@master"
-  needs = ["Upload CV to release"]
-  args = "\"s3 cp dist/cv.pdf s3://github.com-hervenivon/CV/$GITHUB_REF/cv.pdf --acl public-read\""
-  secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]
-}
-
-action "Send release link" {
-  uses = "actions/aws/cli@master"
-  needs = ["Store release file"]
-  args = "sns publish --message \\\"CV Published at https://s3.amazonaws.com/github.com-hervenivon/CV/$GITHUB_REF/cv.pdf\\\" --phone-number $PHONE_NUMBER"
+  needs = ["Store file"]
+  args = "sns publish --message \"CV Published at https://s3.amazonaws.com/github.com-hervenivon/CV/$GITHUB_REF/cv.pdf\" --phone-number $PHONE_NUMBER"
   secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "PHONE_NUMBER"]
 }
