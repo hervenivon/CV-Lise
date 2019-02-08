@@ -5,5 +5,5 @@ workflow "New workflow" {
 
 action "LaTex build from docker" {
   uses = "docker://raabf/latex-versions:latest"
-  runs = "make all"
+  runs = "make all && cp dist/cv.pdf $HOME || exit 1"
 }
