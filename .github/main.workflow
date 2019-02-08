@@ -1,6 +1,6 @@
 workflow "New workflow" {
-  on = "push"
   resolves = ["Upload CV to release"]
+  on = "release"
 }
 
 action "LaTex build" {
