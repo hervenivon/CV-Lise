@@ -3,14 +3,14 @@ workflow "New workflow" {
   resolves = ["Upload CV to release"]
 }
 
-action "LaTex build from docker" {
+action "LaTex build" {
   uses = "docker://raabf/latex-versions:latest"
   runs = "make all"
 }
 
 action "Upload CV to release" {
   uses = "JasonEtco/upload-to-release@maste"
-  needs = ["LaTex build from docker"]
+  needs = ["LaTex build"]
   args = "dist/cv.pdf"
   secrets = ["GITHUB_TOKEN"]
 }
