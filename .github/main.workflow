@@ -3,8 +3,8 @@ workflow "OnRelease Workflow" {
   resolves = ["Send release link"]
 }
 
-workflow "OnPush Workflow" {
-  on = "push"
+workflow "OnPullRequest Workflow" {
+  on = "pull_request"
   resolves = ["Send link"]
 }
 
