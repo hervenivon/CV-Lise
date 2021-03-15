@@ -15,9 +15,6 @@ all: cv
 cv: $(SRCS_DIR)/cv.tex $(SRCS_CV_INCLUDES)
 	$(CC) -output-directory=$(DIST_DIR) $<
 
-extended: $(SRCS_DIR)/cv_extended.tex $(SRCS_CV_INCLUDES)
-	$(CC) -output-directory=$(DIST_DIR) $<
-
 samples: $(foreach x, coverletter cv resume, samples_$x.pdf)
 
 samples_resume.pdf: $(SAMPLES_DIR)/resume.tex $(SAMPLES_RESUME_SRCS)

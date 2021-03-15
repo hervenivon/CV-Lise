@@ -22,6 +22,7 @@
 % - https://tex.stackexchange.com/questions/385440/latex-chronology-change-end-of-timeline/385443
 \usepackage{chronology}
 \usepackage{tikz}
+\usepackage[french, english]{babel}
 \usetikzlibrary{arrows}
 
 % Configure page margins with geometry
@@ -36,7 +37,7 @@
 %                 awesome-nephritis, awesome-concrete, awesome-darknight
 % \colorlet{awesome}{awesome-red}
 % Uncomment if you would like to specify your own color
-\definecolor{awesome}{HTML}{DA291C} %redbird red ☺️
+\definecolor{awesome}{HTML}{FF0038}
 
 % Additional colors for text
 % Uncomment if you would like to specify your own color
@@ -63,8 +64,8 @@
 % Print the footer with 3 arguments(<left>, <center>, <right>)
 % Leave any of these blank if they are not needed
 \makecvfooter
-  {\today}
-  {Hervé Nivon~~~·~~~Curriculum Vitae}
+  {\selectlanguage{french}\today}
+  {Lise Bouley~~~·~~~Curriculum Vitae}
   {\thepage}
 
 %-------------------------------------------------------------------------------
@@ -72,14 +73,13 @@
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
 \input{src/cv/summary.tex}
-\input{src/cv/skills.tex}
-\input{src/cv/education.tex}
-\input{src/cv/work_life_balance.tex}
 \input{src/cv/strengths.tex}
-\newpage
+\input{src/cv/work_life_balance.tex}
 \input{src/cv/experience.tex}
-\input{src/cv/extracurricular.tex}
-\input{src/cv/honors.tex}
+\input{src/cv/education.tex}
+\input{src/cv/skills.tex}
+%\input{src/cv/extracurricular.tex}
+%\input{src/cv/honors.tex}
 
 % Will remain unwritten for the moment:
 % \input{src/cv/presentation.tex}
